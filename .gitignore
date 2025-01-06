@@ -1,0 +1,7 @@
+node_modules/
+sass/
+scss/
+html/
+.vscode/
+.env
+*.db
