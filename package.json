@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "first project to be completed and hosted",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "start": "nodemon app.js"
   },
-  "author": "",
+  "author": "King_Code",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "expressjs": "^1.0.1",
     "mongodb": "^6.12.0",
