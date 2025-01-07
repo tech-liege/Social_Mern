@@ -1,9 +1,10 @@
 import express from 'express';
+import bcrypt from 'bcrypt';
 import User from '../models/User.js';
 
 const router = express.Router();
 
-router.post('/users', async (req, res) => {
+router.post('/register', async (req, res) => {
   try {
     hashedPassword = await bcrypt.hash(req.body.password, 10);
     // const user = await User.create(req.body);
