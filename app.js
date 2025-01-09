@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import userRoutes from './routes/user.js';
+import postRoutes from './routes/post.js';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ const main = async () => {
     });
 
   app.use('/api/user', userRoutes);
+  app.use('/api/post', postRoutes);
 
   app.use(express.json());
   app.use(bodyParser.json());

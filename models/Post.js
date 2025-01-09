@@ -2,12 +2,29 @@ import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
-const PostSchema = new Schema({
-  title: {
+const CommentSchema = new Schema({
+  content: {
     type: String,
     required: true,
   },
-  description: {
+  created_by: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  post: {
+    type: Schema.Types.ObjectId,
+    ref: 'Post',
+    required: true,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
+}); // Disable automatic _id field creation for subdocuments
+
+const PostSchema = new Schema({
+  title: {
     type: String,
     required: true,
   },
@@ -24,23 +41,10 @@ const PostSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  // comments: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Comment',
-  //   },
-  // ],
   comment: [
     {
-      user: { type: Schema.Types.ObjectId, ref: 'User' },
-      content: {
-        type: String,
-        required: true,
-      },
-      created_at: {
-        type: Date,
-        default: Date.now,
-      },
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
     },
   ],
   likes: [
@@ -57,4 +61,6 @@ const PostSchema = new Schema({
   ],
 });
 
-export default model('Post', PostSchema);
+// Export models
+export const Post = model('Post', PostSchema);
+export const Comment = model('Comment', CommentSchema);
