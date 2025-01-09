@@ -127,7 +127,7 @@ router.post('/:postId/unshare', authenticateToken, async (req, res) => {
   }
 });
 
-router.post('/:postId/comment', authenticateToken, async (req, res) => {
+router.post('/:postId/comment/create', authenticateToken, async (req, res) => {
   try {
     const currentUser = await User.findById(req.user._id);
 
@@ -150,7 +150,7 @@ router.post('/:postId/comment', authenticateToken, async (req, res) => {
   }
 });
 
-router.put('/:postId/comment/:commentId/update', authenticateToken, async (req, res) => {
+router.post('/:postId/comment/:commentId/update', authenticateToken, async (req, res) => {
   try {
     const currentUser = await User.findById(req.user._id);
 
@@ -164,7 +164,7 @@ router.put('/:postId/comment/:commentId/update', authenticateToken, async (req, 
       return res.status(403).json({ message: 'Unauthorized' });
     }
 
-    comment.content = req.query.content;
+    comment.content = req.query.content || comment.content;
     await comment.save();
 
     res.json({ message: 'Comment updated successfully', comment });
