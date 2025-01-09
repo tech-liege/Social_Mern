@@ -31,7 +31,7 @@ const main = async () => {
   app.use(bodyParser.json());
   app.use(cors({ origin: true, credentials: true }));
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 6001;
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });
