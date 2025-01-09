@@ -167,7 +167,7 @@ router.put('/:postId/comment/:commentId/update', authenticateToken, async (req, 
     comment.content = req.query.content;
     await comment.save();
 
-    res.json(message: "Comment updated successfully", comment);
+    res.json({ message: 'Comment updated successfully', comment });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
