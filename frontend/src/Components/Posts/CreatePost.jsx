@@ -1,11 +1,9 @@
 import React from 'react';
 
-export default function Posts() {
-  // You can add state and other logic here
-
+export default function CreatePost() {
   return (
     <div>
-      <h2>Posts</h2>
+      <h2>CreatePost</h2>
       {/* Add more JSX elements here */}
     </div>
   );
