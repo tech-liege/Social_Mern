@@ -9,7 +9,6 @@ import Register from './Components/Auth/Register.jsx';
 import Explore from './Components/Explore/Explore.jsx';
 import Feed from './Components/Feed/Feed.jsx';
 import Navbar from './Components/Navbar/Navbar.jsx';
-import Footer from './Components/Footer/Footer.jsx';
 import Posts from './Components/Posts/Posts.jsx';
 import CreatePost from './Components/Posts/CreatePost.jsx';
 import UserProfile from './Components/UserProfile/UserProfile.jsx';
@@ -29,7 +28,6 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/create' element={<CreatePost />} />
           </Routes>
-          <Footer />
         </div>
       </Router>
     </>
