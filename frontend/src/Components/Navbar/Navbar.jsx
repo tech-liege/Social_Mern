@@ -11,6 +11,11 @@ export default function Nav() {
     <nav className='nav'>
       <ul className='nav-list'>
         <li className='nav-item'>
+          <Link to='/create' className='nav-link'>
+            CreatePost
+          </Link>
+        </li>
+        <li className='nav-item'>
           <Link to='/feed' className='nav-link'>
             Feed
           </Link>
@@ -18,11 +23,6 @@ export default function Nav() {
         <li className='nav-item'>
           <Link to='/explore' className='nav-link'>
             Explore
-          </Link>
-        </li>
-        <li className='nav-item'>
-          <Link to='/create' className='nav-link'>
-            CreatePost
           </Link>
         </li>
         <li className='nav-item'>
