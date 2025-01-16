@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 //import component
 import Login from './Components/Auth/Login.jsx';
 import Register from './Components/Auth/Register.jsx';
+// import ResetPassword from './Components/Auth/Reset_Password.jsx';
 import Explore from './Components/Explore/Explore.jsx';
 import Feed from './Components/Feed/Feed.jsx';
 import Navbar from './Components/Navbar/Navbar.jsx';
@@ -24,8 +25,9 @@ function App() {
             <Route path='/explore' element={<Explore />} />
             <Route path='/post' element={<Posts />} />
             <Route path='/user/:userId' element={<UserProfile />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} /> {/* route completed */}
+            <Route path='/register' element={<Register />} /> {/* route completed */}
+            {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
             <Route path='/create' element={<CreatePost />} />
           </Routes>
         </div>

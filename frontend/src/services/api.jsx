@@ -24,3 +24,22 @@ export const login = async userData => {
     console.log('Error', err);
   }
 };
+
+// **Other routes** //
+// follow
+// unfollow
+// getCurrentUser
+// getAllOtherUser
+// getUser
+// *****************//
+// createPost
+// getOnePost
+// getAllPost
+// getUserPost
+// like
+// unlike
+// deletePost
+// updatePost
+// createComment
+// deleteComment
+// updateComment
