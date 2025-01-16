@@ -27,6 +27,3 @@ dist-ssr
 main*.css
 blog.css
 animate.css
-utils.css
-variables-dark.css
-variables.css

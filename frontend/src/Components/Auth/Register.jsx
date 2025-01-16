@@ -12,17 +12,16 @@ export default function Register() {
   });
 
   const handleChange = async e => {
-    console.log('name:', e.target.name);
-    console.log('value:', e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log('formData', formData);
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     try {
-      await register(formData);
+      const res = await register(formData);
+      alert('User registered successfully');
+      console.log(res);
     } catch (err) {
       console.log('ERROR:', err);
     }
@@ -31,25 +30,19 @@ export default function Register() {
   return (
     <div>
       <form className='register-form' onSubmit={handleSubmit}>
-        <h1>Register</h1>
-        <input type='text' className='register-input' placeholder='Username' name='username' onChange={handleChange} />
-        <input type='email' className='register-input' placeholder='Email' name='email' onChange={handleChange} />
-        <input type='password' className='register-input' placeholder='Password' name='password' onChange={handleChange} />
-        <input type='password' className='register-input' placeholder='Confirm Password' name='confirmPassword' onChange={handleChange} />
+        <h1 className='text-align-center'>Register</h1>
+        <input type='text' className='form-control m-2' placeholder='Username' name='username' onChange={handleChange} />
+        <input type='email' className='form-control m-2' placeholder='Email' name='email' onChange={handleChange} />
+        <input type='password' className='form-control m-2' placeholder='Password' name='password' onChange={handleChange} />
+        {/* <input type='password' className='form-control' placeholder='Confirm Password' name='confirmPassword' onChange={handleChange} /> */}
 
-        <button type='submit' className='register-button'>
+        <button type='submit' className='btn btn-primary m-2'>
           Register
         </button>
         <p className='text-muted'>
           Already have an account?{' '}
-          <Link className='register-link' to='/login'>
+          <Link className='link-primary' to='/login'>
             Login
-          </Link>
-        </p>
-        <p className='text-muted'>
-          Forgot Password?{' '}
-          <Link className='register-link' to='/reset-password'>
-            Reset Password
           </Link>
         </p>
       </form>

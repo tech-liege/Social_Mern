@@ -24,14 +24,21 @@ const main = async () => {
       console.log(error);
     });
 
+  app.use(express.json());
+  app.use(bodyParser.json());
+  app.use(
+    cors({
+      origin: 'http://localhost:5173',
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
+    })
+  );
+
   app.use('/api/user', userRoutes);
   app.use('/api/post', postRoutes);
 
-  app.use(express.json());
-  app.use(bodyParser.json());
-  app.use(cors({ origin: true, credentials: true }));
-
-  const port = process.env.PORT || 6001;
+  const port = process.env.PORT || 3908;
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });
