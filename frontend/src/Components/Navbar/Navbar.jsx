@@ -9,6 +9,7 @@ export default function Nav() {
 
   return (
     <nav className='nav'>
+      {/* Logo, active state, responsiveness, Hamburger menu */}
       <ul className='nav-list'>
         <li className='nav-item'>
           <Link to='/create' className='nav-link'>

@@ -9,8 +9,8 @@ const router = express.Router();
 router.post('/create', authenticateToken, async (req, res) => {
   try {
     const post = new Post({
-      title: req.query.title,
-      content: req.query.content,
+      title: req.body.title,
+      content: req.body.content,
       created_by: req.user._id,
     });
     const newPost = await post.save();
@@ -135,7 +135,7 @@ router.post('/:postId/comment/create', authenticateToken, async (req, res) => {
     if (!post) return res.status(404).json({ message: 'Post not found' });
 
     const comment = new Comment({
-      content: req.query.content,
+      content: req.body.content,
       created_by: currentUser._id,
       post: post._id,
     });
@@ -164,7 +164,7 @@ router.post('/:postId/comment/:commentId/update', authenticateToken, async (req,
       return res.status(403).json({ message: 'Unauthorized' });
     }
 
-    comment.content = req.query.content || comment.content;
+    comment.content = req.body.content || comment.content;
     await comment.save();
 
     res.json({ message: 'Comment updated successfully', comment });
@@ -232,8 +232,8 @@ router.post('/update/:postId', authenticateToken, async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
     if (!post) return res.status(404).json({ message: 'Post not found' });
-    post.title = req.query.title || post.title;
-    post.content = req.query.content || post.content;
+    post.title = req.body.title || post.title;
+    post.content = req.body.content || post.content;
     await post.save();
     res.json({ message: 'Successful', post });
   } catch (error) {
@@ -243,7 +243,7 @@ router.post('/update/:postId', authenticateToken, async (req, res) => {
 
 router.post('/search', authenticateToken, async (req, res) => {
   try {
-    const searchQuery = req.query.search;
+    const searchQuery = req.body.search;
     const regex = new RegExp(searchQuery, 'gi');
 
     const filteredPosts = await Post.find({ title: regex })

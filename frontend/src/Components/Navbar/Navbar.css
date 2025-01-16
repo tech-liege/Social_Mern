@@ -1,33 +1,33 @@
 .nav {
-  background-color: #3b3b3b;
-  padding: 0px;
-  margin: 0px;
+  background: linear-gradient(to bottom, #00000000, #947a2b); /*Gradient Transparency*/  
+  height: fit-content;
+  border-bottom-right-radius: 20px; /*Rounded Edge - Adjust as needed*/  
+  border-bottom-left-radius: 20px; /*Rounded Edge - Adjust as needed*/  
+  padding: 0 20px; /* Adjust padding as needed*/  
 }
 
-.nav-list {
+.nav-list { 
+  padding: 20px;
   display: flex;
-  flex-direction: row;
-  list-style: none;
-  padding: 10px;
   align-content: center;
-  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.nav-item {
-  text-align: center;
-  display: inline-block;
-  margin: 0 0px;
+  list-style: none; 
+  justify-content: space-around;  /* Adjust spacing as needed*/  
+  align-items: center;  
+  height: 100%; /*Make sure items are vertically centered*/  
 }
 
 .nav-link {
-  color: whitesmoke;
-  text-decoration: none;
   font-size: 1rem;
-  transition: color 0.3s ease;
+  text-decoration: none;  
+  color: #292929; /* Light gray or off-white text color*/  
+  font-weight: bold;  
+  padding: 10px 20px;
+  transition: transform 0.2s ease; 
 }
 
 .nav-link:hover {
-  color: #ffda5f;
+  color: #b89533;
+  transform: scale(1.05);
 }
