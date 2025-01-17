@@ -80,6 +80,14 @@ export const searchUserByEmail = async searchInput => {
   }
 };
 
+// export const addFriend = async userId => {
+//   try {
+//     API.post(`/user/${userId}/friend/add`, { headers: getAuthHeader() });
+//   } catch (err) {
+//     console.log('Error', err);
+//   }
+// };
+
 // *****************//
 
 export const getPosts = async () => {
@@ -181,6 +189,22 @@ export const deleteComment = async (postId, commentId) => {
 export const updateComment = async (postId, commentId, commentData) => {
   try {
     API.post(`/post/${postId}/comment/${commentId}/update`, commentData, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const likeComment = async (postId, commentId) => {
+  try {
+    API.post(`/post/${postId}/comment/${commentId}/like`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const unlikeComment = async (postId, commentId) => {
+  try {
+    API.post(`/post/${postId}/comment/${commentId}/unlike`, { headers: getAuthHeader });
   } catch (err) {
     console.log('Error', err);
   }

@@ -201,6 +201,62 @@ router.post('/:postId/comment/:commentId/delete', authenticateToken, async (req,
   }
 });
 
+
+router.post('/:postId/comment/:commentId/like', authenticateToken, async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.user._id);
+
+    const post = await Post.findById(req.params.postId);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+
+    const comment = await Comment.findById(req.params.commentId);
+    if (!comment) return res.status(404).json({ message: 'Comment not found' });
+
+    if (post.comment.includes(comment._id)) {
+      if (!comment.likes.includes(currentUser._id)) {
+        comment.likes.push(currentUser._id);
+        await comment.save();
+
+        res.status(201).json({ message: 'Liked successfully' });
+      } else {
+        res.status(400).json({ message: 'Already liked' });
+      }
+    } else {
+      res.status(400).json({ message: "Comment doesn't belong to the post" });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+});
+
+router.post('/:postId/comment/:commentId/unlike', authenticateToken, async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.user._id);
+
+    const post = await Post.findById(req.params.postId);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+
+    const comment = await Comment.findById(req.params.commentId);
+    if (!comment) return res.status(404).json({ message: 'Comment not found' });
+
+    if (post.comment.includes(comment._id)) {
+      if (!comment.likes.includes(currentUser._id)) {
+        comment.likes.pull(currentUser._id);
+        await comment.save();
+
+        res.status(201).json({ message: 'Unliked successfully' });
+      } else {
+        res.status(400).json({ message: `Haven't liked` });
+      }
+    } else {
+      res.status(400).json({ message: "Comment doesn't belong to the post" });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+});
+
+
 router.get('/user/:userId', authenticateToken, async (req, res) => {
   try {
     const posts = await Post.find({ created_by: req.params.userId })
