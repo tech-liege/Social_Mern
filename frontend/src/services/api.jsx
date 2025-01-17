@@ -3,7 +3,7 @@ import axios from 'axios';
 // eslint-disable-next-line react-refresh/only-export-components
 const API = axios.create({ baseURL: 'http://localhost:3000/api' });
 
-export const getAuthHeader = () => {
+const getAuthHeader = () => {
   const token = localStorage.getItem('token');
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
@@ -18,8 +18,31 @@ export const register = userData => {
 
 export const login = async userData => {
   try {
-    const res = API.post('/user/login', userData);
-    return res ? res : {};
+    API.post('/user/login', userData);
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const getPosts = async () => {
+  try {
+    API.get('/post', { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const getOnePosts = async () => {
+  try {
+    API.get(`/post/'`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const createPosts = async postData => {
+  try {
+    API.get('/post/create', postData);
   } catch (err) {
     console.log('Error', err);
   }
@@ -32,9 +55,7 @@ export const login = async userData => {
 // getAllOtherUser
 // getUser
 // *****************//
-// createPost
 // getOnePost
-// getAllPost
 // getUserPost
 // like
 // unlike
