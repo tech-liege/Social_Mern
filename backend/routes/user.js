@@ -92,7 +92,7 @@ router.post('/unfollow/:userId', authenticateToken, async (req, res) => {
 });
 
 // Get all users
-router.get('/exploreUsers', authenticateToken, async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
   try {
     const users = await User.find();
     const currentUser = await User.findById(req.user._id);
@@ -115,6 +115,29 @@ router.get('/profile/:userId', authenticateToken, async (req, res) => {
   }
 });
 
+router.post('/search/username', authenticateToken, async (req, res) => {
+  try {
+    const searchQuery = req.body.search;
+    const regex = new RegExp(searchQuery, 'gi');
+
+    const filteredUsers = await User.find({ username: regex });
+    res.json({ filteredUsers });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.post('/search/email', authenticateToken, async (req, res) => {
+  try {
+    const searchQuery = req.body.search;
+    const regex = new RegExp(searchQuery, 'gi');
+
+    const filteredUsers = await User.find({ email: regex });
+    res.json({ filteredUsers });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 export default router;

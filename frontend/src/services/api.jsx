@@ -24,6 +24,64 @@ export const login = async userData => {
   }
 };
 
+export const follow = async () => {
+  try {
+    API.post('/user//follow/:userId', { headers: getAuthHeader() });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const unfollow = async () => {
+  try {
+    API.post('/user/unfollow/:userId', { headers: getAuthHeader() });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const getAllUsers = async () => {
+  try {
+    API.get('/user', { headers: getAuthHeader() });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const getCurrentUser = async () => {
+  try {
+    API.get('/user/profile', { headers: getAuthHeader() });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const getOneUser = async userId => {
+  try {
+    API.get(`/user/profile/${userId}`, { headers: getAuthHeader() });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const searchUserByUsername = async searchInput => {
+  try {
+    API.get(`/user/search/username`, searchInput, { headers: getAuthHeader() });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const searchUserByEmail = async searchInput => {
+  try {
+    API.get(`/user/search/email`, searchInput, { headers: getAuthHeader() });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+// *****************//
+
 export const getPosts = async () => {
   try {
     API.get('/post', { headers: getAuthHeader });
@@ -32,9 +90,17 @@ export const getPosts = async () => {
   }
 };
 
-export const getOnePosts = async () => {
+export const getOnePosts = async postId => {
   try {
-    API.get(`/post/'`, { headers: getAuthHeader });
+    API.get(`/post/${postId}`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const getUserPosts = async userId => {
+  try {
+    API.get(`/post/user/${userId}`, { headers: getAuthHeader });
   } catch (err) {
     console.log('Error', err);
   }
@@ -42,25 +108,80 @@ export const getOnePosts = async () => {
 
 export const createPosts = async postData => {
   try {
-    API.get('/post/create', postData);
+    API.post('/post/create', postData);
   } catch (err) {
     console.log('Error', err);
   }
 };
 
-// **Other routes** //
-// follow
-// unfollow
-// getCurrentUser
-// getAllOtherUser
-// getUser
-// *****************//
-// getOnePost
-// getUserPost
-// like
-// unlike
-// deletePost
-// updatePost
-// createComment
-// deleteComment
-// updateComment
+export const deletePost = async postId => {
+  try {
+    API.post(`/post/delete/${postId}`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const updatePost = async (postId, PostData) => {
+  try {
+    API.post(`/post/update/${postId}`, PostData, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const likePost = async postId => {
+  try {
+    API.post(`/post/${postId}/like`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const unlikePost = async postId => {
+  try {
+    API.post(`/post/${postId}/unlike`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const sharePost = async postId => {
+  try {
+    API.post(`/post/${postId}/share`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const unsharePost = async postId => {
+  try {
+    API.post(`/post/${postId}/unshare`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const createComment = async (postId, commentData) => {
+  try {
+    API.post(`/post/${postId}/comment/create`, commentData, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const deleteComment = async (postId, commentId) => {
+  try {
+    API.post(`/post/${postId}/comment/${commentId}/delete`, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const updateComment = async (postId, commentId, commentData) => {
+  try {
+    API.post(`/post/${postId}/comment/${commentId}/update`, commentData, { headers: getAuthHeader });
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
