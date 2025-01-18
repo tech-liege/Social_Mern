@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import './Explore.css';
+import { login } from '../../services/api';
+import { Link } from 'react-router-dom';
 
 export default function Explore() {
-  // Component logic and state can be added here
-
   return (
     <div>
       <h2>Explore</h2>

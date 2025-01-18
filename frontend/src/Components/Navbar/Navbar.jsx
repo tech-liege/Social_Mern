@@ -7,6 +7,12 @@ import './Navbar.css';
 export default function Nav() {
   // Component logic and state can be added here
 
+  const logout = async () => {
+    localStorage.removeItem('token');
+    alert('User logged-out successfully');
+    window.location.pathname = '/'; //.reload();
+  };
+
   return (
     <nav className='nav'>
       {/* Logo, active state, responsiveness, Hamburger menu */}
@@ -30,6 +36,11 @@ export default function Nav() {
           <Link to='/user/:userId' className='nav-link'>
             Profile
           </Link>
+        </li>
+        <li className='nav-item'>
+          <span className='nav-link' onClick={logout}>
+            Logout
+          </span>
         </li>
         <li className='nav-item'>
           <Link to='/login' className='nav-link'>

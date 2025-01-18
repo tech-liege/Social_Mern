@@ -19,9 +19,8 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const res = await register(formData);
-      alert('User registered successfully');
-      console.log(res);
+      const { data } = await register(formData);
+      alert(`User registered successfully.Id:${data._id}, Username: ${data.username}, Email:${data.email}, Password:${formData.password}`);
     } catch (err) {
       console.log('ERROR:', err);
     }

@@ -29,7 +29,7 @@ export default function Login() {
   return (
     <div>
       <form className='login-form' onSubmit={handleSubmit}>
-        <h1 className='text-align-center'>Register</h1>
+        <h1 className='text-align-center'>Login</h1>
         <input type='email' className='form-control m-2' placeholder='Email' name='email' onChange={handleChange} />
         <input type='password' className='form-control m-2' placeholder='Password' name='password' onChange={handleChange} />
 

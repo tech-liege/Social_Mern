@@ -6,6 +6,7 @@ import cors from 'cors';
 
 import userRoutes from './routes/user.js';
 import postRoutes from './routes/post.js';
+import globalRoutes from './routes/global.js';
 
 dotenv.config();
 
@@ -37,6 +38,8 @@ const main = async () => {
 
   app.use('/api/user', userRoutes);
   app.use('/api/post', postRoutes);
+
+  app.use('/api/global', globalRoutes);
 
   const port = process.env.PORT || 3908;
   app.listen(port, () => {
