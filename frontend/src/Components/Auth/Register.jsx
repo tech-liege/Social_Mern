@@ -39,7 +39,7 @@ export default function Register() {
   };
   return (
     <div>
-      <LoadingOverlay active={active} spinner={<BounceLoader />}>
+      <LoadingOverlay active={active} spinner={<BounceLoader />} fadeSpeed='300'>
         <form className='register-form' onSubmit={handleSubmit}>
           <h1 className='text-align-center'>Register</h1>
           <input type='text' className='form-control m-2' placeholder='Username' name='username' onChange={handleChange} />

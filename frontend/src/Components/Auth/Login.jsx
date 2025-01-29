@@ -39,7 +39,7 @@ export default function Login() {
   };
   return (
     <div>
-      <LoadingOverlay active={active} spinner={<BounceLoader />}>
+      <LoadingOverlay active={active} spinner={<BounceLoader />} fadeSpeed='300'>
         <form className='login-form' onSubmit={handleSubmit}>
           <h1 className='text-align-center'>Login</h1>
           <input type='email' className='form-control m-2' placeholder='Email' name='email' onChange={handleChange} />
