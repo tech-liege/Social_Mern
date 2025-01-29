@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LoadingOverlay from 'react-loading-overlay';
+import LoadingOverlay from 'react-loading-overlay.jsx';
 import BounceLoader from 'react-spinners/BounceLoader';
 
 import './Explore.css';
