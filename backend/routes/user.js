@@ -97,7 +97,6 @@ router.get('/', authenticateToken, async (req, res) => {
     const users = await User.find();
     const currentUser = await User.findById(req.user._id);
     const filteredUsers = users.filter(user => user._id != currentUser._id);
-    console.log(filteredUsers);
     res.json(filteredUsers);
   } catch (error) {
     res.status(500).json({ message: error.message });
