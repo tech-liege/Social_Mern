@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LoadingOverlay from 'react-loading-overlay.jsx';
-import BounceLoader from 'react-spinners/BounceLoader';
 
 import './Explore.css';
 import { getAllUsers, getCurrentUser, follow, unfollow } from '../../services/api';
@@ -19,10 +17,9 @@ export default function Explore() {
 
         setUsers(usersResponse.data);
         setCurrentUser(currentUserResponse.data);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -57,7 +54,7 @@ export default function Explore() {
   };
 
   return isLoading ? (
-    <LoadingOverlay active={true} spinner={<BounceLoader />} className='d-block h-100 w-100'></LoadingOverlay>
+    <span className='m-auto'>Loading..</span>
   ) : (
     <div className='container'>
       <h1>Explore</h1>
@@ -67,8 +64,8 @@ export default function Explore() {
             <Link to={`/user/${user._id}`}>
               <span>{user.username}</span>
               <span>{user.email}</span>
-              <span>{user.following}</span>
-              <span>{user.followers}</span>
+              <span>{user.following.length}</span>
+              <span>{user.followers.length}</span>
             </Link>
             {user.following?.includes(currentUser?._id) ? (
               <button className='btn btn-primary' onClick={handleUnfollow(user._id)}>

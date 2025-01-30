@@ -26,13 +26,18 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const user = await User.findOne({ 'email': req.body.email });
+    var user = {};
+    if (req.body.email) {
+      user = await User.findOne({ 'email': req.body.email });
+    } else {
+      user = await User.findOne({ 'username': req.body.username });
+    }
     if (!user) return res.status(404).json({ message: 'User does not exist' });
 
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '168h' });
 
     res.header('Authorization', token).json({ token: token });
   } catch (error) {
@@ -59,9 +64,7 @@ router.post('/follow/:userId', authenticateToken, async (req, res) => {
       await currentUser.save();
       targetUser.followers.push(currentUser._id);
       await targetUser.save();
-      res
-        .status(201)
-        .json({ 'message': 'Successful', 'User': currentUser, 'TargetUser': targetUser });
+      res.status(201).json({ 'message': 'Successful', 'User': currentUser, 'TargetUser': targetUser });
     } else {
       res.status(400).json({ message: 'Already following' });
     }
@@ -80,9 +83,7 @@ router.post('/unfollow/:userId', authenticateToken, async (req, res) => {
       await currentUser.save();
       targetUser.followers.pull(currentUser._id);
       await targetUser.save();
-      res
-        .status(201)
-        .json({ 'message': 'Successful', 'User': currentUser, 'TargetUser': targetUser });
+      res.status(201).json({ 'message': 'Successful', 'User': currentUser, 'TargetUser': targetUser });
     } else {
       res.status(400).json({ message: 'Not following' });
     }
@@ -94,10 +95,8 @@ router.post('/unfollow/:userId', authenticateToken, async (req, res) => {
 // Get all users
 router.get('/', authenticateToken, async (req, res) => {
   try {
-    const users = await User.find();
-    const currentUser = await User.findById(req.user._id);
-    const filteredUsers = users.filter(user => user._id != currentUser._id);
-    res.json(filteredUsers);
+    const users = await User.find({ _id: { $ne: req.user._id } });
+    res.json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -10,6 +10,7 @@ import Register from './Components/Auth/Register.jsx';
 import Explore from './Components/Explore/Explore.jsx';
 import Feed from './Components/Feed/Feed.jsx';
 import Navbar from './Components/Navbar/Navbar.jsx';
+import Sidebar from './Components/Sidebar/Sidebar.jsx';
 import Posts from './Components/Posts/Posts.jsx';
 import CreatePost from './Components/Posts/CreatePost.jsx';
 import UserProfile from './Components/UserProfile/UserProfile.jsx';
@@ -20,16 +21,23 @@ function App() {
       <Router>
         <div>
           <Navbar />
-          <Routes>
-            <Route path='/feed' element={<Feed />} />
-            <Route path='/explore' element={<Explore />} />
-            <Route path='/post' element={<Posts />} />
-            <Route path='/user/:userId' element={<UserProfile />} />
-            <Route path='/login' element={<Login />} /> {/* route completed */}
-            <Route path='/register' element={<Register />} /> {/* route completed */}
-            {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
-            <Route path='/create' element={<CreatePost />} />
-          </Routes>
+          <div className='row'>
+            <div className='col-1'>
+              <Sidebar />
+            </div>
+            <div className='col-auto'>
+              <Routes>
+                <Route path='/feed' element={<Feed />} />
+                <Route path='/explore' element={<Explore />} />
+                <Route path='/post' element={<Posts />} />
+                <Route path='/user/:userId' element={<UserProfile />} />
+                <Route path='/login' element={<Login />} /> {/* route completed */}
+                <Route path='/register' element={<Register />} /> {/* route completed */}
+                {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
+                <Route path='/create' element={<CreatePost />} />
+              </Routes>
+            </div>
+          </div>
         </div>
       </Router>
     </>
