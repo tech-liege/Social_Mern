@@ -1,4 +1,4 @@
-.register-form {
+.post-form {
   height: fit-content;
   width: fit-content;
   padding: 30px;
@@ -12,6 +12,6 @@
   margin: 0 auto; /* Center the form horizontally */
 }
 
-.register-form h2 {
+.post-form h2 {
   margin-bottom: 20px;
 }

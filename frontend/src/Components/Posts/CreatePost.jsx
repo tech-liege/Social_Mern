@@ -25,8 +25,8 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <form className='register-form ml-auto mr-auto' onSubmit={handleSubmit}>
+    <div className='container-md'>
+      <form className='post-form' onSubmit={handleSubmit}>
         <h1 className='text-align-center'>Create Post</h1>
         <input type='text' className='form-control m-2' placeholder='title' name='title' onChange={handleChange} />
         <input type='content' className='form-control m-2' placeholder='content' name='content' onChange={handleChange} />

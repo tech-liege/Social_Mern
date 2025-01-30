@@ -25,7 +25,7 @@ function App() {
             <div className='col-1'>
               <Sidebar />
             </div>
-            <div className='col-auto'>
+            <div className='col-11'>
               <Routes>
                 <Route path='/feed' element={<Feed />} />
                 <Route path='/explore' element={<Explore />} />
