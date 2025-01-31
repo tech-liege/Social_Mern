@@ -95,7 +95,7 @@ router.post('/unfollow/:userId', authenticateToken, async (req, res) => {
 // Get all users
 router.get('/', authenticateToken, async (req, res) => {
   try {
-    const users = await User.find({ _id: { $ne: req.user._id } });
+    const users = await User.find();
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });

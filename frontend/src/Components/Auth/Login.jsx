@@ -21,6 +21,7 @@ export default function Login() {
       const { data } = await login(formData);
       localStorage.setItem('token', data.token);
       alert('User logged-in successfully');
+      window.location.pathname = '/feed';
     } catch (err) {
       console.log('ERROR:', err);
     }

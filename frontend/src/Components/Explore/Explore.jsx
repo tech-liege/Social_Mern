@@ -17,6 +17,10 @@ export default function Explore() {
 
         setUsers(usersResponse.data);
         setCurrentUser(currentUserResponse.data);
+
+        console.log(users);
+        console.log(currentUser);
+
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -24,7 +28,7 @@ export default function Explore() {
     };
 
     fetchData();
-  }, []);
+  }, [currentUser, users]);
 
   const resetUsers = async () => {
     try {

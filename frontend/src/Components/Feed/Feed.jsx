@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 import './Feed.css';
-import { getAllUsers, getCurrentUser, follow, unfollow } from '../../services/api';
+import { getAllposts, getCurrentUser, follow, unfollow } from '../../services/api';
 import { Link } from 'react-router-dom';
 
 export default function Feed() {
-  const [users, setUsers] = useState([]);
+  const [posts, setposts] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersResponse = await getAllUsers();
+        const postsResponse = await getAllposts();
         const currentUserResponse = await getCurrentUser();
 
-        setUsers(usersResponse.data);
+        setposts(postsResponse.data);
         setCurrentUser(currentUserResponse.data);
         setIsLoading(false);
       } catch (error) {
@@ -26,28 +26,17 @@ export default function Feed() {
     fetchData();
   }, []);
 
-  const resetUsers = async () => {
+  const handleUnfollow = async postId => {
     try {
-      const usersResponse = await getAllUsers();
-      setUsers(usersResponse.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleUnfollow = async userId => {
-    try {
-      await unfollow(userId);
-      resetUsers();
+      await unfollow(postId);
     } catch (error) {
       console.log('Unfollow Error: ', error);
     }
   };
 
-  const handleFollow = async userId => {
+  const handleFollow = async postId => {
     try {
-      await follow(userId);
-      resetUsers();
+      await follow(postId);
     } catch (error) {
       console.log('Follow Error: ', error);
     }
@@ -58,22 +47,20 @@ export default function Feed() {
   ) : (
     <div className='container'>
       <h1>Feed</h1>
-      <ul className='user-list'>
-        {users.map(user => (
-          <li className='user-list-item' key={user._id}>
-            <Link to={`/user/${user._id}`}>
-              <span>{user.username}</span>
-              <span>{user.email}</span>
-              <span>{user.following.length}</span>
-              <span>{user.followers.length}</span>
+      <ul className='post-list'>
+        {posts.map(post => (
+          <li className='post-list-item' key={post._id}>
+            <Link to={`/post/${post._id}`}>
+              <span>{post.title}</span>
+              <span>{post.content}</span>
             </Link>
-            {user.following?.includes(currentUser?._id) ? (
-              <button className='btn btn-primary' onClick={handleUnfollow(user._id)}>
-                Unfollow
+            {post.likes?.includes(currentUser?._id) ? (
+              <button className='btn btn-primary' onClick={handleUnfollow(post._id)}>
+                Unlike
               </button>
             ) : (
-              <button className='btn btn-primary' onClick={handleFollow(user._id)}>
-                Follow
+              <button className='btn btn-primary' onClick={handleFollow(post._id)}>
+                Like
               </button>
             )}
           </li>

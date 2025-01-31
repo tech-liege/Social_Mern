@@ -70,4 +70,12 @@ router.post('/search', authenticateToken, async (req, res) => {
   }
 });
 
+router.post('/', async (req, res) => {
+  try {
+    res.status(200).json({ message: 'active', bool: true });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export default router;

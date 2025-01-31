@@ -8,6 +8,15 @@ const getAuthHeader = () => {
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
+export const isAPIActive = () => {
+  try {
+    return API.post('/global');
+  } catch (error) {
+    console.log('Error', error);
+    return false;
+  }
+};
+
 export const register = userData => {
   try {
     return API.post('/user/register', userData);
