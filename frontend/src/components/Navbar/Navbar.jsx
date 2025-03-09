@@ -1,32 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
-import { getCurrentUser } from '../../services/api';
+// import { getCurrentUser } from '../../services/api';
 
 import './Navbar.css';
 
 export default function Nav() {
-  // Component logic and state can be added here
-  const [currentUser, setCurrentUser] = useState({});
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const currentUserResponse = await getCurrentUser();
-        currentUserResponse ? setCurrentUser(currentUserResponse.data) : setCurrentUser(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetch();
-  }, []);
-
-  const logout = async () => {
-    await localStorage.removeItem('token');
-    alert('User logged-out successfully');
-    window.location.pathname = '/'; //.reload();
-  };
-
   return (
     <nav className='nav'>
       {/* Logo, active state, responsiveness, Hamburger menu */}
@@ -46,32 +25,32 @@ export default function Nav() {
             Explore
           </Link>
         </li>
-        {currentUser ? (
+        {/* {currentUser ? (
           <li className='nav-item'>
             <Link to={`/user/${currentUser._id}`} className='nav-link'>
               Profile
             </Link>
           </li>
-        ) : (
-          <li className='nav-item'>
-            <Link to='/login' className='nav-link'>
-              Login
-            </Link>
-          </li>
-        )}
+        ) : ( */}
+        <li className='nav-item'>
+          <Link to='/login' className='nav-link'>
+            Login
+          </Link>
+        </li>
+        {/* )}
         {currentUser ? (
           <li className='nav-item'>
             <span className='nav-link' onClick={logout}>
               Logout
             </span>
           </li>
-        ) : (
-          <li className='nav-item'>
-            <Link to='/register' className='nav-link'>
-              Register
-            </Link>
-          </li>
-        )}
+        ) : ( */}
+        <li className='nav-item'>
+          <Link to='/register' className='nav-link'>
+            Register
+          </Link>
+        </li>
+        {/* )} */}
       </ul>
     </nav>
   );
