@@ -5,17 +5,22 @@ import authenticateToken from '../middleware/auth.js';
 const router = express.Router();
 
 // Create a post
-router.post('/', authenticateToken, async (req, res) => {
-    try {
-        const post = new Post({
-            user: req.user._id,
-            content: req.body.content
-        });
-        await post.save();
-        res.status(201).json({"status":'Post created successfully',"data":post});
-    } catch (err) {
-        res.status(400).json(err);
-    }
+router.post('/create', authenticateToken, async (req, res) => {
+  try {
+    const post = new Post({
+      user: req.user._id,
+      title: req.body.title,
+      description: req.body.description,
+      content: req.body.content,
+      image: req.body.image,
+      video: req.body.video,
+      location: req.body.location,
+    });
+    await post.save();
+    res.status(201).json({ 'status': 'Post created successfully', 'data': post });
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 // Get all posts

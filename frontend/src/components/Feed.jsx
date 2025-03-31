@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchPosts } from '../services/api';
 import Post from './Posts/Post';
+import './Posts/CreatePost';
+import CreatePost from './Posts/CreatePost';
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -19,11 +21,15 @@ const Feed = () => {
   }, []);
 
   return (
-    <div>
-      {posts.map((post) => (
-        <Post key={post._id} post={post} />
-      ))}
-    </div>
+    <>
+      <CreatePost />
+      <h1>Feed</h1>
+      <div>
+        {posts.map(post => (
+          <Post key={post._id} post={post} />
+        ))}
+      </div>
+    </>
   );
 };
 

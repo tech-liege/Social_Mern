@@ -11,11 +11,6 @@ export default function Nav() {
       {/* Logo, active state, responsiveness, Hamburger menu */}
       <ul className='nav-list'>
         <li className='nav-item'>
-          <Link to='/create' className='nav-link'>
-            CreatePost
-          </Link>
-        </li>
-        <li className='nav-item'>
           <Link to='/feed' className='nav-link'>
             Feed
           </Link>

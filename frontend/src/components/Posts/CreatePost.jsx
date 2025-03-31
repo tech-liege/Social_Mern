@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 import { createPost } from '../../services/api';
 
 const CreatePost = () => {
-  const [content, setContent] = useState('');
+  const [formData, setFormData] = useState({
+    title: '',
+    content: '',
+    description: '',
+    image: '',
+    video: '',
+    location: '',
+  });
 
-  const handleSubmit = async (e) => {
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
-        console.log("content",content)
-      await createPost({ content });
-      setContent('');
+      const response = await createPost(formData);
+      setFormData({ title: '', content: '', description: '' });
       alert('Post created successfully');
     } catch (err) {
       console.error(err);
@@ -19,13 +29,15 @@ const CreatePost = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
-        name="content"
-        placeholder="What's on your mind?"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
-      <button type="submit">Post</button>
+      <input name='title' placeholder='Title' onChange={handleChange} />
+      <input name='description' placeholder='Description (optional)' onChange={handleChange} />
+      <textarea name='content' placeholder="What's on your mind?" onChange={handleChange} />
+      <button type='submit'>Create Post</button>
+      <small>You must be logged in to create a post.</small>
+      {/* <small>
+        Image: <input type="file" name="image" />
+        Video: <input type="file" name="video" />
+      </small> */}
     </form>
   );
 };
